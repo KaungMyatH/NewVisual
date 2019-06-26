@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Traffic Light By Nemo</title>
+</head>
+<link rel="stylesheet" href="./site.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<body>    
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1><strong>Traffi Light</strong></h1>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success btn-lg" id="go">GO</button>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                    <div class="bulb" id="b1Red">60</div>
+            </div>
+            <div class="col">
+                    <div class="bulb" id="b2Red">60</div>
+            </div>              
+        </div>
+        <div class="row">
+                <div class="col">
+                    <div class="bulb" id="b1Green">60</div>
+                </div>
+                <div class="col">
+                    <div class="bulb" id="b2Green">60</div>
+                </div>               
+        </div>
+        <div class="row">
+                <div class="col">
+                        <div class="bulb" id="b1Yellow">60</div>
+                </div>
+                <div class="col">
+                        <div class="bulb" id="b2Yellow">60</div>
+                </div>         
+        </div>
+        
+            
+        
+           
+            
+    </div>   
+</body>
+<!-- <script src="/main.js"></script> -->
+<script src="/jquery.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+    $("#go").click(function(){
+        traffic();     
+        
+    });
+
+    function traffic(){
+       
+        Gtimer();
+        function Gtimer() {
+           
+    var gsec = 6;
+    var rsec = 6;
+
+
+    function gUpdateTime() {
+        rsec--;
+        gsec--;
+
+        $('#b1Green').addClass("green");
+        $('#b1Green').text(gsec);
+        
+        $('#b2Red').addClass("red");
+        $('#b2Red').text(rsec);
+
+        if (gsec < 1 && rsec<1) {
+            
+            $('#b1Green').removeClass("green");
+            $('#b1Green').text(0);
+            $('#b1Yellow').addClass("yellow");
+
+            $('#b2Red').removeClass("red");
+            $('#b2Red').text(0);
+            $('#b2Green').addClass("green");          
+
+            Ytimer();
+            clearInterval(ginterval);
+        }
+    }
+    gUpdateTime();
+    var ginterval = setInterval(gUpdateTime, 1000);
+}
+
+function Rtimer() {
+    var rsec = 6;
+    var ysec = 6;
+    function rUpdateTime() {
+        rsec--;
+        ysec--;
+        
+        $('#b1Red').addClass("red");
+        $('#b1Red').text(rsec);
+
+        $('#b2Yellow').addClass("yellow");
+        $('#b2Yellow').text(ysec);
+
+        if (rsec < 1 && ysec <1 ) {
+
+            $('#b1Red').removeClass("red");
+            $('#b1Red').text(0);
+            $('#b1Green').addClass("green");
+
+            $('#b2Yellow').removeClass("yellow");
+            $('#b2Yellow').text(0);
+            $('#b2Red').addClass("red");
+
+            Gtimer();
+            clearInterval(rinterval);
+        }
+
+    }
+    rUpdateTime();
+    var rinterval = setInterval(rUpdateTime, 1000);
+
+}
+
+function Ytimer() {
+    var ysec = 6;
+    var gsec = 6;
+
+    function yUpdateTime() {
+        ysec--;
+        gsec--;
+    
+        $('#b1Yellow').addClass("yellow");
+        $('#b1Yellow').text(ysec);
+
+        $('#b2Green').addClass("green");
+        $('#b2Green').text(gsec);
+
+      
+        if (ysec < 1 && gsec<1) {
+
+            $('#b1Yellow').removeClass("yellow");
+            $('#b1Yellow').text(0);
+            $('#b1Red').addClass("red");
+
+            $('#b2Green').removeClass("green");
+            $('#b2Green').text(0);
+            $('#b2Yellow').addClass("yellow");
+
+            Rtimer();
+            clearInterval(yinterval);
+        }
+    }
+    yUpdateTime();
+    var yinterval = setInterval(yUpdateTime, 1000);
+}
+    }
+
+    
+    });
+</script>
+</html>
